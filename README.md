@@ -1,5 +1,8 @@
 # Docker container images with "headless" VNC session
 
+cloned from docker-headless-vnc-container
+-----------------------------------------
+
 This repository contains a collection of Docker images with headless VNC environments.
 
 Each Docker image is installed with the following components:
