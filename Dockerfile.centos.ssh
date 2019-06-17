@@ -1,0 +1,19 @@
+FROM consol/centos-xfce-vnc
+
+
+USER 0
+MAINTAINER VK
+
+RUN yum install -y openssh-clients openssh-server && yum clean all
+
+RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -q -N ""
+RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -q -N ""
+RUN ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -q -N ""
+RUN ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ed25519_key -q -N ""
+ADD ./src/common/scripts/ /dockerstartup/
+
+
+USER 1000
+
+ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]
+CMD ["--wait"]

@@ -9,15 +9,16 @@ MAINTAINER VK
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-RUN yum install -y openssh-clients openssh-server
-ADD ../../HostDir/anaconda /anaconda 
-ADD ../../HostDir/ansys_inc /ansys_inc
+#RUN yum install -y openssh-clients openssh-server
+ADD ./anaconda/ /anaconda
+
+#ADD ../../HostDir/ansys_inc /ansys_inc
 #RUN curl https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh -o /tmp/installer.sh
 
-#ADD ./src/common/install/ $INST_SCRIPTS/
 #CMD $STARTUPDIR/start.sh
 
 USER 1000
+ENV PATH="/anaconda/bin:/ansys_inc/bin:${PATH}"
 
 ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]
 CMD ["--wait"]
